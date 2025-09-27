@@ -71,3 +71,7 @@ This project will be managed using a `pyproject.toml` file to define project met
 *   **Source Control:** The project will be hosted on GitHub.
 *   **Dependencies:** Project dependencies, such as `opencv-python` and `pillow`, will be listed in the `pyproject.toml` file.
 *   **Entry Point:** The `pyproject.toml` file will define a script entry point, allowing the tool to be run as `vid-scr` from the command line after installation.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
