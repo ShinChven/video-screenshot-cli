@@ -34,23 +34,35 @@ def main():
 
     fps = cap.get(cv2.CAP_PROP_FPS)
     frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+    if fps <= 0 or frame_count <= 0:
+        print("Error: Unable to read video metadata.")
+        return
+
     duration = frame_count / fps
 
     if args.number:
         if args.number <= 0:
             print("Error: --number must be a positive integer.")
             return
-        interval = duration / args.number
+        capture_count = args.number
+        if capture_count == 1:
+            midpoint = duration / 2 if duration else 0
+            timestamps = [midpoint]
+        else:
+            timestamps = [
+                (i / (capture_count - 1)) * duration
+                for i in range(capture_count)
+            ]
     else:
         if args.interval <= 0:
             print("Error: --interval must be a positive number.")
             return
         interval = args.interval
+        timestamps = [i * interval for i in range(int(duration / interval))]
 
     screenshots = []
-    for i in range(int(duration / interval)):
-        time_in_seconds = i * interval
-        frame_number = int(time_in_seconds * fps)
+    for i, time_in_seconds in enumerate(timestamps):
+        frame_number = min(int(round(time_in_seconds * fps)), frame_count - 1)
         cap.set(cv2.CAP_PROP_POS_FRAMES, frame_number)
         ret, frame = cap.read()
 
