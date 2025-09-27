@@ -1,6 +1,6 @@
 ## Overview
 
-Create a CLi in python that reads a video file, and takes screenshots at specified intervals, saving them to a designated directory.
+A CLI in python that reads a video file, and takes screenshots at specified intervals, saving them to a designated directory.
 
 ## Installation
 
