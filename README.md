@@ -10,8 +10,6 @@ Install the CLI directly from the GitHub repository so all dependencies are pull
 pip install git+https://github.com/ShinChven/video-screenshot-cli.git
 ```
 
-
-
 ## The Command Line Interface (CLI)
 
 Utility: vid-scr
