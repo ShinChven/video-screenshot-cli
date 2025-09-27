@@ -11,6 +11,7 @@ def main():
     parser.add_argument('--merge', action='store_true', help='If provided, produce a merged contact-sheet/combined image from the captured thumbnails.')
     parser.add_argument('--size', type=int, help='Constrain the longest side of the output image to a specific length in pixels, while maintaining the original aspect ratio.')
     parser.add_argument('--number', type=int, help='Number of screenshots to capture.')
+    parser.add_argument('--format', type=str, default='jpeg', choices=['png', 'jpeg', 'jpg', 'webp'], help='Image format for the thumbnails.')
 
     args = parser.parse_args()
 
@@ -65,7 +66,7 @@ def main():
                 frame = cv2.resize(frame, (new_width, new_height))
 
             video_filename = os.path.basename(args.video_file)
-            screenshot_path = os.path.join(args.output, f"{video_filename}_screenshot_{i + 1}.png")
+            screenshot_path = os.path.join(args.output, f"{video_filename}_screenshot_{i + 1}.{args.format}")
             cv2.imwrite(screenshot_path, frame)
             screenshots.append(screenshot_path)
             print(f"Saved screenshot to {screenshot_path}")
@@ -97,7 +98,7 @@ def main():
                 y_offset += max(heights)
 
         video_filename = os.path.basename(args.video_file)
-        merged_image_path = os.path.join(args.output, f"{video_filename}_merged.png")
+        merged_image_path = os.path.join(args.output, f"{video_filename}_merged.{args.format}")
         merged_image.save(merged_image_path)
         print(f"Saved merged screenshot to {merged_image_path}")
 

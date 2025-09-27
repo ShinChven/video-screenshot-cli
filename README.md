@@ -4,11 +4,13 @@ Create a CLi in python that reads a video file, and takes screenshots at specifi
 
 ## Installation
 
-Before running the CLI, the required Python packages must be installed.
+Install the CLI directly from the GitHub repository so all dependencies are pulled in automatically.
 
 ```bash
-pip install opencv-python pillow
+pip install git+https://github.com/ShinChven/video-screenshot-cli.git
 ```
+
+
 
 ## The Command Line Interface (CLI)
 
@@ -56,3 +58,11 @@ The core of the utility will be implemented using the OpenCV library (`cv2`) for
 Examples:
 	- Capture thumbnails every 10 seconds and save to the working directory.
 	- Capture every 5 seconds and create a merged contact sheet by enabling --merge.
+
+## Project Structure and Distribution
+
+This project will be managed using a `pyproject.toml` file to define project metadata, dependencies, and entry points.
+
+*   **Source Control:** The project will be hosted on GitHub.
+*   **Dependencies:** Project dependencies, such as `opencv-python` and `pillow`, will be listed in the `pyproject.toml` file.
+*   **Entry Point:** The `pyproject.toml` file will define a script entry point, allowing the tool to be run as `vid-scr` from the command line after installation.
