@@ -28,12 +28,13 @@ vid-scr <video-file> [--interval <seconds>] [--output <directory>] [--merge] [--
 | `--output <directory>` | Directory where thumbnails will be written. | current working directory |
 | `--merge` | If provided, produce a merged contact-sheet/combined image from the captured thumbnails. This option does not remove the individual screenshot images. | disabled |
 | `--size <pixels>` | Constrain the longest side of the output image to a specific length in pixels, while maintaining the original aspect ratio. | |
+| `--format <type>` | Image format for the thumbnails (one of `png`, `jpeg`, `jpg`, or `webp`). | `jpeg` |
 
 ### Behavior
 - The output directory will be created if it does not already exist.
 - If --number is specified, the interval between screenshots will be calculated as `video_duration / number`.
-- Thumbnails are emitted as image files (PNG or JPEG).
-- The output file name will be in the format of `<video_filename>_screenshot_<index>.<format>`.
+- Thumbnails are emitted using the selected image format (PNG, JPEG/JPG, or WEBP).
+- The output file name will be in the format of `<video_filename>_screenshot_<index>.<format>`, using the format chosen via `--format`.
 - When --merge is used, thumbnails are laid out in a grid.
 - Progress, warnings, and errors should be reported to standard output/error.
 
