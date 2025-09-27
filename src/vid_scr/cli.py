@@ -10,7 +10,7 @@ def main():
     parser.add_argument('--output', default=os.getcwd(), help='Directory where thumbnails will be written.')
     parser.add_argument('--merge', action='store_true', help='If provided, produce a merged contact-sheet/combined image from the captured thumbnails.')
     parser.add_argument('--size', type=int, help='Constrain the longest side of the output image to a specific length in pixels, while maintaining the original aspect ratio.')
-    parser.add_argument('--number', type=int, help='Number of screenshots to capture.')
+    parser.add_argument('--count', type=int, help='Number of screenshots to capture.')
     parser.add_argument('--format', type=str, default='jpeg', choices=['png', 'jpeg', 'jpg', 'webp'], help='Image format for the thumbnails.')
 
     args = parser.parse_args()
@@ -40,11 +40,11 @@ def main():
 
     duration = frame_count / fps
 
-    if args.number:
-        if args.number <= 0:
-            print("Error: --number must be a positive integer.")
+    if args.count:
+        if args.count <= 0:
+            print("Error: --count must be a positive integer.")
             return
-        capture_count = args.number
+        capture_count = args.count
         if capture_count == 1:
             midpoint = duration / 2 if duration else 0
             timestamps = [midpoint]
