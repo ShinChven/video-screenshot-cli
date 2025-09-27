@@ -30,7 +30,7 @@ Purpose: Capture thumbnails from a video at regular time intervals and optionall
 
 Usage:
 ```bash
-vid-scr <video-file> [--interval <seconds>] [--output <directory>] [--merge] [--size <pixels>] [--count <captures>]
+vid-scr <video-file> [--interval <seconds>] [--output <directory>] [--merge] [--size <pixels>] [--count <captures>] [--limit <max>]
 ```
 
 | Option | Description | Default |
@@ -40,11 +40,13 @@ vid-scr <video-file> [--interval <seconds>] [--output <directory>] [--merge] [--
 | `--merge` | If provided, produce a merged contact-sheet/combined image from the captured thumbnails. This option does not remove the individual screenshot images. | disabled |
 | `--size <pixels>` | Constrain the longest side of the output image to a specific length in pixels, while maintaining the original aspect ratio. | |
 | `--count <captures>` | Number of thumbnails to capture, evenly spaced across the video. | |
+| `--limit <max>` | Maximum number of thumbnails to keep; extra captures beyond the cap are skipped. | |
 
 ### Behavior
 - The output directory will be created if it does not already exist.
 - When `--count` is provided, the requested number of thumbnails are evenly spaced from the first frame through the final frame (a single capture targets the midpoint).
 - With `--interval`, thumbnails are captured at the requested cadence until the end of the video.
+- When `--limit` is provided, only the earliest captures up to that maximum are saved.
 - Thumbnails are emitted as image files (PNG or JPEG).
 - The output file name will be in the format of `<video_filename>_screenshot_<index>.<format>`.
 - When --merge is used, thumbnails are laid out in a grid.
@@ -52,6 +54,7 @@ vid-scr <video-file> [--interval <seconds>] [--output <directory>] [--merge] [--
 
 ### Constraints
 - Interval must be a positive numeric value (integer or float).
+- Limit must be a positive integer when used.
 - Input validation: confirm the video file exists and is a supported format before processing.
 - Video metadata (FPS and frame count) must be readable; otherwise the CLI exits with an error message.
 

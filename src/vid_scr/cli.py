@@ -12,6 +12,7 @@ def main():
     parser.add_argument('--size', type=int, help='Constrain the longest side of the output image to a specific length in pixels, while maintaining the original aspect ratio.')
     parser.add_argument('--count', type=int, help='Number of screenshots to capture.')
     parser.add_argument('--format', type=str, default='jpeg', choices=['png', 'jpeg', 'jpg', 'webp'], help='Image format for the thumbnails.')
+    parser.add_argument('--limit', type=int, help='Maximum number of screenshots to keep, prioritizing the earliest captures.')
 
     args = parser.parse_args()
 
@@ -24,6 +25,10 @@ def main():
 
     if not os.path.exists(args.output):
         os.makedirs(args.output)
+
+    if args.limit is not None and args.limit <= 0:
+        print("Error: --limit must be a positive integer.")
+        return
 
     print(f"Processing {args.video_file}...")
 
@@ -59,6 +64,9 @@ def main():
             return
         interval = args.interval
         timestamps = [i * interval for i in range(int(duration / interval))]
+
+    if args.limit is not None:
+        timestamps = timestamps[:args.limit]
 
     screenshots = []
     for i, time_in_seconds in enumerate(timestamps):
